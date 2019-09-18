@@ -8,7 +8,7 @@ namespace Item_Shop
 {
     class Character
     {
-        private PlayerInventory _bag = new PlayerInventory();
+        private CharacterInventory _bag = new CharacterInventory();
         
         private string _name;
 
@@ -20,7 +20,7 @@ namespace Item_Shop
         {
             return _name;
         }
-        public PlayerInventory GetPlayerInventory()
+        public CharacterInventory GetPlayerInventory()
         {
             return _bag;
         }

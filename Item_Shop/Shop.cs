@@ -42,7 +42,7 @@ namespace Item_Shop
             }            
         }
         public void BuyingMenu(ShopKeeper merchant, Character player)
-        {
+        {           
             Console.WriteLine("What would you like to purchase?\n");
             for (int i = 0; i < merchant.GetInventory().GetItemList().Length; i++)
             {

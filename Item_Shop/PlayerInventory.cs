@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Item_Shop
 {
-    class PlayerInventory
+    class CharacterInventory
     {
         private Item[] _itemList = new Item[5];
         private int _gold = 1000;
 
-        public PlayerInventory()
+        public CharacterInventory()
         {
             _itemList[0] = new Item(5, "Knife");
             _itemList[1] = new Item(5, "hat");
