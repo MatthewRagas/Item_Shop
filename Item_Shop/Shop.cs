@@ -11,11 +11,15 @@ namespace Item_Shop
         private ShopKeeper _merchant;
         private Character _player;
 
+
+        //Constructor for the Shop passes in a player and a shop keeper.
         public Shop(Character player, ShopKeeper merchant)
         {
             _player = player;
             _merchant = merchant;
         }
+
+        //Brings up the Shop menu options for the player to choose from
         public void ShopMenu()
         {
             Console.WriteLine("Welcome " + _player.GetName() + "!");
@@ -41,6 +45,8 @@ namespace Item_Shop
                 }
             }            
         }
+
+        //Displays possible items that can be bought from the shop inventory
         public void BuyingMenu(ShopKeeper merchant, Character player)
         {           
             Console.WriteLine("What would you like to purchase?\n");
@@ -51,15 +57,42 @@ namespace Item_Shop
 
             }
         }
+
+        //Displays possible items that can be sold from player inventory
         public void SellingMenu(ShopKeeper merchant, Character player)
         {
             Console.WriteLine("What would you like to sell?\n");
-            for (int i = 0; i < player.GetPlayerInventory().GetItemList().Length; i++)
+            for (int i = 0; i < player.GetInventory().GetItemList().Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + player.GetPlayerInventory().GetItemList()[i].GetName());
-                Console.WriteLine("Gold: " + player.GetPlayerInventory().GetItemList()[i].GetValue() + "\n");
+                Console.WriteLine((i + 1) + ": " + player.GetInventory().GetItemList()[i].GetName());
+                Console.WriteLine("Gold: " + player.GetInventory().GetItemList()[i].GetValue() + "\n");
 
             }
         }
+
+        //Decrements the gold variable of the player by the value of the item purchased.
+        //and gives the merchant that amount of gold
+        public void PlayerBuying(ShopKeeper merchant, Character player, int choice)
+        {
+            if(player.GetInventory().GetGold >= merchant.GetInventory().GetItemList()[choice].GetValue())
+            {
+                player.GetInventory().GetGold -= merchant.GetInventory().GetItemList()[choice].GetValue();
+                merchant.GetInventory().GetGold += merchant.GetInventory().GetItemList()[choice].GetValue();
+            }
+            else
+            {
+                Console.WriteLine("no");
+            }
+            
+            
+        }
+
+        //Decrements the gold variable of the merchant by the value of the item sold and gives the player
+        //that amount of gold.
+        public void PlayerSelling(ShopKeeper merchant, Character player, int choice)
+        {
+            merchant.GetInventory().GetGold -= player.GetInventory().GetItemList()[choice].GetValue();
+            player.GetInventory().GetGold += player.GetInventory().GetItemList()[choice].GetValue();
+        }        
     }
 }
