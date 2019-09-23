@@ -15,8 +15,7 @@ namespace Item_Shop
             ShopKeeper merchant = new ShopKeeper();
             Shop store = new Shop(player, merchant);
             store.ShopMenu();
-
             Console.ReadKey();
-        }
+        }        
     }
 }

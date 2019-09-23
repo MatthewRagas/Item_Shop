@@ -10,6 +10,7 @@ namespace Item_Shop
     {
         private int _healing;
 
+        //Constructor for consumable items
         public Consumables(string newName, int newHealing, int newValue, string newDescription)
         {
             _name = newName;
@@ -17,5 +18,6 @@ namespace Item_Shop
             _value = newValue;
             _description = newDescription;
         }
+
     }
 }

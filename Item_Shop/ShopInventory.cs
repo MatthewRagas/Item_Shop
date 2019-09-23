@@ -79,6 +79,6 @@ namespace Item_Shop
             _itemList = newList;
 
             return _itemList;
-        }
+        }               
     }
 }
