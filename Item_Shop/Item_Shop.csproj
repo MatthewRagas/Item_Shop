@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttackItem.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="Consumables.cs" />
+    <Compile Include="DefenseItem.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="CharacterInventory.cs" />
     <Compile Include="Program.cs" />

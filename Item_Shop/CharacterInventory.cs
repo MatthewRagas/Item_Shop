@@ -15,15 +15,15 @@ namespace Item_Shop
         //Constructor for the character Inventory
         public CharacterInventory()
         {
-            _itemList[0] = new Item(5, "Knife");
-            _itemList[1] = new Item(5, "hat");
-            _itemList[2] = new Item(5, "Shirt");
-            _itemList[3] = new Item(45, "Obsidian Shield");
-            _itemList[4] = new Item(50, "Sword of Chaos");
+            _itemList[0] = new AttackItem("Knife", 7, 5, "Nothing is as light weight as a knife, allowing for quick and precise strikes");
+            _itemList[1] = new DefenseItem("Steel Helm", 30, 75, "It would be wise to not leave the head unprotected. This works...I guess.");
+            _itemList[2] = new DefenseItem("Steel Shield", 25, 60,"A good steel shield for a good strong mercenary");
+            _itemList[3] = new DefenseItem("Obsidian Shield", 80, 300, "Everyone knows the heat of Mt. Ranja's lava cannot be cooled, but somehow, some ancient creature possessed this capability and with it, allowed for such a shield to be made.");
+            _itemList[4] = new AttackItem("Sword of Chaos", 85, 667, "This sword was forged in the blood of battle. As you take hold of it, it almost feels like it's taking hold of you.");
         }
 
         //Returns the value of the _gold variable
-        public int GetGold
+        public int Gold
         {
             set
             {
@@ -43,6 +43,7 @@ namespace Item_Shop
             return _itemList;
         }
 
+        //Adds an item to the character inventory
         public Item[] Add(Item item)
         {
             Item[] newInventory = new Item[_itemList.Length + 1];
@@ -59,6 +60,7 @@ namespace Item_Shop
             return _itemList;
         }
 
+        //Removes an item from the character inventory
         public Item[] Remove(int index)
         {
             Item[] newList = new Item[_itemList.Length - 1];

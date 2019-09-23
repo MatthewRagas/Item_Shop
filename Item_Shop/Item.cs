@@ -10,18 +10,12 @@ namespace Item_Shop
     {
 
         //Gold variable
-        protected int _value;
+        protected int _value = 1;
 
         //Name variable
-        protected string _name;
+        protected string _name = "";                
 
-        //Constructor of base items
-        public Item(int value, string name)
-        {
-            _value = value;
-            _name = name;
-        }
-
+        protected string _description;
         //Function to return item name
         public string GetName()
         {
