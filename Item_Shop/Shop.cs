@@ -22,6 +22,7 @@ namespace Item_Shop
         //Brings up the Shop menu options for the player to choose from
         public void ShopMenu()
         {
+            Console.Clear();
             Console.WriteLine("Welcome " + _player.GetName() + "!");
             string choice = "";
             while(choice != "0")
@@ -45,7 +46,7 @@ namespace Item_Shop
                 }
                 else if(choice == "SUPER USER")
                 {
-                    UserEditingMenu();
+                    UserEditingMenu(_merchant, _player);
                 }
             }            
         }
@@ -58,6 +59,8 @@ namespace Item_Shop
             if(merchant.GetInventory().GetItemList().Length > 0)
             {
                 Console.WriteLine("0: Exit\n");
+
+                //Iterates through the shop inventory array to display info to the user.
                 for (int i = 0; i < merchant.GetInventory().GetItemList().Length; i++)
                 {
                     Console.WriteLine((i + 1) + ": " + merchant.GetInventory().GetItemList()[i].GetName());
@@ -82,6 +85,8 @@ namespace Item_Shop
             Console.WriteLine("What would you like to sell?\n");
 
             Console.WriteLine("0: Exit\n");
+
+            //Iterates through the player Inventory to display info to the user
             if(player.GetInventory().GetItemList().Length > 0)
             {
                 for (int i = 0; i < player.GetInventory().GetItemList().Length; i++)
@@ -100,6 +105,8 @@ namespace Item_Shop
         //and gives the merchant that amount of gold
         public void PlayerBuying(ShopKeeper merchant, Character player, int choice)
         {
+
+            //Allows player to buy item if they have enough gold
             if(player.GetInventory().Gold >= merchant.GetInventory().GetItemList()[choice].GetValue())
             {
                 player.GetInventory().Gold -= merchant.GetInventory().GetItemList()[choice].GetValue();
@@ -118,15 +125,23 @@ namespace Item_Shop
         //that amount of gold.
         public void PlayerSelling(ShopKeeper merchant, Character player, int choice)
         {
-            merchant.GetInventory().Gold -= player.GetInventory().GetItemList()[choice].GetValue();
-            player.GetInventory().Gold += player.GetInventory().GetItemList()[choice].GetValue();
 
-            merchant.GetInventory().Add(player.GetInventory().GetItemList()[choice]);
-            player.GetInventory().Remove(choice);
+            if(merchant.GetInventory().Gold > player.GetInventory().GetItemList()[choice].GetValue())
+            {
+                //Gold is added to the player and subtracted from the merchant
+                merchant.GetInventory().Gold -= player.GetInventory().GetItemList()[choice].GetValue();
+                player.GetInventory().Gold += player.GetInventory().GetItemList()[choice].GetValue();
+
+                //Player item is added to shop inventory and removed from player inventory
+                merchant.GetInventory().Add(player.GetInventory().GetItemList()[choice]);
+                player.GetInventory().Remove(choice);
+            }            
+
+            
         }
         
         //Displays options for the super user
-        public void UserEditingMenu()
+        public void UserEditingMenu(ShopKeeper merchant, Character player)
         {
             string choice = "";
             while (choice != "0")
@@ -143,17 +158,17 @@ namespace Item_Shop
                 }
                 else if(choice == "1")
                 {
-                    AddMenu();
+                    AddMenu(merchant, player);
                 }
                 else if(choice == "2")
                 {
-                    RemoveMenu();
+                    RemoveMenu(merchant, player);
                 }
             }
         }
 
         //Displays the options for wha the super user wants to add
-        public void AddMenu()
+        public void AddMenu(ShopKeeper merchant, Character player)
         {
             Console.Clear();            
             string choice = "";
@@ -170,17 +185,17 @@ namespace Item_Shop
                 }
                 else if(choice == "1")
                 {
-                    ShopAdd();
+                    ShopAdd(merchant);
                 }
                 else if(choice == "2")
                 {
-                    PlayerAdd();
+                    PlayerAdd(player);
                 }
             }
         }
 
         //Displays the options for what the super user wants to remove
-        public void RemoveMenu()
+        public void RemoveMenu(ShopKeeper merchant, Character player)
         {
             Console.Clear();
             string choice = "";
@@ -197,17 +212,17 @@ namespace Item_Shop
                 }
                 else if (choice == "1")
                 {
-
+                    ShopRemove(merchant);
                 }
                 else if (choice == "2")
                 {
-
+                    PlayerRemove(player);
                 }
             }
         }
 
         //Allows the super user to add items and gold to the shop inventory
-        public void ShopAdd()
+        public void ShopAdd(ShopKeeper merchant)
         {
             Console.Clear();
             string choice = "";
@@ -227,34 +242,34 @@ namespace Item_Shop
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a defense item you need to \ninput the item's: 'Name', 'Defense stat, 'Gold value', and then 'Description'\nPress enter after you input each paramater");
-                    _merchant.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    merchant.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "2")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add an attack item you need to \ninput the item's: 'Name', 'Damage stat', 'Gold vlaue', and the 'Description'\nPress enter after you input each paramater");
-                    _merchant.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    merchant.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "3")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a consumable item you need to \ninput the item's: 'Name', 'healing amount', 'Gold value', and then 'Description'");
-                    _merchant.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    merchant.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "4")
                 {
                     Console.Clear();
                     Console.WriteLine("Input how much gold you want to add to the merchant.");
-                    Console.WriteLine("Current gold: " + _merchant.GetInventory().Gold + "\n");
+                    Console.WriteLine("Current gold: " + merchant.GetInventory().Gold + "\n");
                     int newGold = (Convert.ToInt32(Console.ReadLine()));
-                    _merchant.GetInventory().Gold += newGold;
+                    merchant.GetInventory().Gold += newGold;
                 }
             }
 
         }
 
         //Allows the super user to add items and gold to user inventory
-        public void PlayerAdd()
+        public void PlayerAdd(Character player)
         {
             Console.Clear();
             string choice = "";
@@ -274,29 +289,75 @@ namespace Item_Shop
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a defense item you need to \ninput the item's: 'Name', 'Defense stat, 'Gold value', and then 'Description'\nPress enter after you input each paramater");
-                    _player.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+
+                    //Uses the add function of the player to add a new item into the player's inventory
+                    player.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "2")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add an attack item you need to \ninput the item's: 'Name', 'Damage stat', 'Gold vlaue', and the 'Description'\nPress enter after you input each paramater");
-                    _player.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+
+                    //Uses the add function of the player to add a new item into the player's inventory
+                    player.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "3")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a consumable item you need to \ninput the item's: 'Name', 'healing amount', 'Gold value', and then 'Description'");
-                    _player.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+
+                    //Uses the add function of the player to add a new item into the player's inventory
+                    player.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
                 }
                 else if (choice == "4")
                 {
                     Console.Clear();
-                    Console.WriteLine("Input how much gold you want to add to the merchant.");
-                    Console.WriteLine("Current gold: " + _player.GetInventory().Gold + "\n");
+                    Console.WriteLine("Input how much gold you want to add to the player.");
+                    Console.WriteLine("Current gold: " + player.GetInventory().Gold + "\n");
                     int newGold = (Convert.ToInt32(Console.ReadLine()));
-                    _player.GetInventory().Gold += newGold;
+
+                    //Adds gold to the player
+                    player.GetInventory().Gold += newGold;
                 }
             }
         }
-    }
+
+        public void ShopRemove(ShopKeeper merchant)
+        {
+            Console.Clear();
+
+            Console.WriteLine("What would you like to remove from the shop inventory?");
+
+            Console.WriteLine("0: Exit\n");
+
+            //Iterates through the shop inventory array to display info to the user.
+            for (int i = 0; i < merchant.GetInventory().GetItemList().Length; i++)
+            {
+                Console.WriteLine((i + 1) + ": " + merchant.GetInventory().GetItemList()[i].GetName());             
+            }
+
+            int choice = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            merchant.GetInventory().Remove(choice);
+        }
+
+        public void PlayerRemove(Character player)
+        {
+            Console.Clear();
+
+            Console.WriteLine("What would you like to remove from the player inventory?");
+
+            Console.WriteLine("0: Exit\n");
+
+            //Iterates through the shop inventory array to display info to the user.
+            for (int i = 0; i < player.GetInventory().GetItemList().Length; i++)
+            {
+                Console.WriteLine((i + 1) + ": " + player.GetInventory().GetItemList()[i].GetName());
+            }
+
+            int choice = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            player.GetInventory().Remove(choice);
+        }
+    }    
 }

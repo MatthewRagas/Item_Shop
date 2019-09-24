@@ -67,7 +67,7 @@ namespace Item_Shop
 
             int n = 0;
 
-            for(int i = 0; i < newList.Length; i++)
+            for(int i = 0; i < _itemList.Length; i++)
             {
                 if(i != index)
                 {
