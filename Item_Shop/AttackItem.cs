@@ -11,8 +11,12 @@ namespace Item_Shop
         private int _damage;        
 
         //Property to reference the _damage variable
-        public int Damage
+        public override int GetAttack
         {
+            set
+            {
+                _damage = value;
+            }
             get
             {
                 return _damage;
@@ -27,5 +31,7 @@ namespace Item_Shop
             _value = newValue;
             _description = newDescription;
         }
+
+
     }
 }

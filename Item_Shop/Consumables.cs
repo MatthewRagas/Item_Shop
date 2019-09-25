@@ -19,5 +19,17 @@ namespace Item_Shop
             _description = newDescription;
         }
 
+        public override int GetHealing
+        {
+            set
+            {
+                _healing = value;
+            }
+            get
+            {
+                return _healing;
+            }
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Item_Shop
 {
@@ -48,6 +49,10 @@ namespace Item_Shop
                 else if(choice == "SUPER USER")
                 {
                     UserEditingMenu();
+                }
+                else if(choice == "3")
+                {
+                    SaveGame("ItemShop.txt");
                 }
             }            
         }
@@ -374,6 +379,57 @@ namespace Item_Shop
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;
 
             _player.GetInventory().Remove(choice);
+        }
+
+        public void SaveGame(string path)
+        {
+            StreamWriter writer = File.CreateText(path);
+
+            writer.WriteLine(_player.GetName());            
+
+            for(int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
+            {
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetName());
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetAttack);
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetDefense);
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetHealing);
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetValue());
+                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetDescription());
+            }
+
+            writer.Close();
+        }
+
+        public void LoadGame(string path)
+        {
+            if(File.Exists(path))
+            {
+                StreamReader reader = File.OpenText(path);
+
+                for(int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
+                {
+                    _player.GetInventory().GetItemList()[i].GetAttack = Convert.ToInt32(reader.ReadLine());
+                    _player.GetInventory().GetItemList()[i].GetDefense = Convert.ToInt32(reader.ReadLine());
+                    _player.GetInventory().GetItemList()[i].GetHealing = Convert.ToInt32(reader.ReadLine());
+
+
+                    //If item is an attack item
+                    if (_player.GetInventory().GetItemList()[i].GetAttack > 0)
+                    {
+                        _player.GetInventory().GetItemList()[i].GetName() = reader.ReadLine();
+                    }
+                    //if item is a defense item
+                    else if((_player.GetInventory().GetItemList()[i].GetDefense > 0))
+                    {
+
+                    }
+                    //if item is a consumable
+                    else
+                    {
+
+                    }
+                }                
+            }
         }
     }    
 }

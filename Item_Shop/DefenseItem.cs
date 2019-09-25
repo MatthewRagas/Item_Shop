@@ -12,8 +12,12 @@ namespace Item_Shop
         
 
         //Property to reference the _defense variable
-        public int Defense
+        public override int GetDefense
         {
+            set
+            {
+                _defense = value;
+            }
             get
             {
                 return _defense;
