@@ -17,15 +17,29 @@ namespace Item_Shop
 
         protected string _description;
         //Function to return item name
-        public virtual string GetName()
+        public virtual string GetName
         {
-            return _name;
+            set
+            {
+                _name = value;
+            }
+            get
+            {
+                return _name;
+            }            
         }
 
         //Function to return item gold value
-        public virtual int GetValue()
+        public virtual int GetValue
         {
-            return _value;
+            set
+            {
+                _value = value;
+            }
+            get
+            {
+                return _value;
+            }            
         }
 
         public virtual int GetAttack
@@ -64,9 +78,28 @@ namespace Item_Shop
             }            
         }
 
-        public string GetDescription()
+        public string GetDescription
         {
-            return _description;
+            set
+            {
+                _description = value;
+            }
+            get
+            {
+                return _description;
+            }            
+        }
+
+        public virtual int GetID
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return 0;
+            }
         }
     }
 }

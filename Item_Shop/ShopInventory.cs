@@ -14,14 +14,14 @@ namespace Item_Shop
         //Constructor for the shop's inventory
         public ShopInventory()
         {
-            _itemList[0] = new DefenseItem("Rags", 0, 1, "Used to lcean yourself up.");
-            _itemList[1] = new DefenseItem("Leather Armor", 20, 45, "Standard training gear.");
-            _itemList[2] = new DefenseItem("Wooden Shield", 5, 10, "Standard trainging gear.");
-            _itemList[3] = new AttackItem("Long Sword", 16, 55, "For the more adept warrior.");
-            _itemList[4] = new DefenseItem("Gloves", 0, 5, "It's chilly outside.");
-            _itemList[5] = new DefenseItem("Leather Boots", 10, 25, "Standard training gear.");
-            _itemList[6] = new Consumables("Brownies", 15, 3, "Warm and fluffy. Just like mother used to make them.");
-            _itemList[7] = new Consumables("God's Chosen Chicken Sandwich", 777, 10, "This chicken has been embued with the power on high and brings new life to you.");
+            _itemList[0] = new DefenseItem("Rags", 0, 1, 2, "Used to lcean yourself up.");
+            _itemList[1] = new DefenseItem("Leather Armor", 20, 45, 2, "Standard training gear.");
+            _itemList[2] = new DefenseItem("Wooden Shield", 5, 10, 2, "Standard trainging gear.");
+            _itemList[3] = new AttackItem("Long Sword", 16, 55, 1, "For the more adept warrior.");
+            _itemList[4] = new DefenseItem("Gloves", 0, 5, 2, "It's chilly outside.");
+            _itemList[5] = new DefenseItem("Leather Boots", 10, 25, 2, "Standard training gear.");
+            _itemList[6] = new Consumables("Brownies", 15, 3, 3, "Warm and fluffy. Just like mother used to make them.");
+            _itemList[7] = new Consumables("God's Chosen Chicken Sandwich", 777, 10, 3, "This chicken has been embued with the power on high and brings new life to you.");
         }       
 
         //Returns the item array list.
@@ -41,6 +41,13 @@ namespace Item_Shop
             {
                 return _gold;
             }            
+        }
+        public int InventoryLength
+        {
+            get
+            {
+                return _itemList.Length;
+            }
         }
 
         //Adds an item to the shop inventory

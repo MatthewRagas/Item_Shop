@@ -24,14 +24,14 @@ namespace Item_Shop
         public void ShopMenu()
         {
             Console.Clear();
-            Console.WriteLine("Welcome " + _player.GetName() + "!");
+            Console.WriteLine("Welcome " + _player.GetName + "!");
             string choice = "";
             while(choice != "0")
             {
                 Console.Clear();
                 Console.WriteLine("what would you like to do?");
                 Console.WriteLine("0: Exit\n1: Buy\n2: Sell\n");
-                Console.WriteLine(_player.GetName() + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName() + ": " + _merchant.GetInventory().Gold);
+                Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                 choice = Console.ReadLine();
 
                 if (choice == "0")
@@ -49,11 +49,7 @@ namespace Item_Shop
                 else if(choice == "SUPER USER")
                 {
                     UserEditingMenu();
-                }
-                else if(choice == "3")
-                {
-                    SaveGame("ItemShop.txt");
-                }
+                }                
             }            
         }
 
@@ -69,10 +65,10 @@ namespace Item_Shop
                 //Iterates through the shop inventory array to display info to the user.
                 for (int i = 0; i < _merchant.GetInventory().GetItemList().Length; i++)
                 {
-                    Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName());
-                    Console.WriteLine("Gold: " + _merchant.GetInventory().GetItemList()[i].GetValue() + "\n");
+                    Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName);
+                    Console.WriteLine("Gold: " + _merchant.GetInventory().GetItemList()[i].GetValue + "\n");
                 }
-                Console.WriteLine(_player.GetName() + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName() + ": " + _merchant.GetInventory().Gold);
+                Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 if(choice == 0)
@@ -90,17 +86,17 @@ namespace Item_Shop
             Console.Clear();
             Console.WriteLine("What would you like to sell?\n");
 
-            Console.WriteLine("0: Exit\n");
+            Console.WriteLine((_player.GetInventory().GetItemList().Length + 1) + ": Exit\n");
 
             //Iterates through the player Inventory to display info to the user
             if(_player.GetInventory().GetItemList().Length > 0)
             {
                 for (int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
                 {
-                    Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName());
-                    Console.WriteLine("Gold: " + _player.GetInventory().GetItemList()[i].GetValue() + "\n");
+                    Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName);
+                    Console.WriteLine("Gold: " + _player.GetInventory().GetItemList()[i].GetValue + "\n");
                 }
-                Console.WriteLine(_player.GetName() + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName() + ": " + _merchant.GetInventory().Gold);
+                Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                 int choice = Convert.ToInt32(Console.ReadLine());
                 PlayerSelling(choice - 1);
             }
@@ -113,10 +109,10 @@ namespace Item_Shop
         {
 
             //Allows player to buy item if they have enough gold
-            if(_player.GetInventory().Gold >= _merchant.GetInventory().GetItemList()[choice].GetValue())
+            if(_player.GetInventory().Gold >= _merchant.GetInventory().GetItemList()[choice].GetValue)
             {
-                _player.GetInventory().Gold -= _merchant.GetInventory().GetItemList()[choice].GetValue();
-                _merchant.GetInventory().Gold += _merchant.GetInventory().GetItemList()[choice].GetValue();
+                _player.GetInventory().Gold -= _merchant.GetInventory().GetItemList()[choice].GetValue;
+                _merchant.GetInventory().Gold += _merchant.GetInventory().GetItemList()[choice].GetValue;
 
                 _player.GetInventory().Add(_merchant.GetInventory().GetItemList()[choice]);
                 _merchant.GetInventory().Remove(choice);
@@ -132,20 +128,20 @@ namespace Item_Shop
         public void PlayerSelling(int choice)
         {
 
-            if(_merchant.GetInventory().Gold >= _player.GetInventory().GetItemList()[choice].GetValue())
+            if(_merchant.GetInventory().Gold >= _player.GetInventory().GetItemList()[choice].GetValue)
             {
                 //Gold is added to the player and subtracted from the merchant
-                _merchant.GetInventory().Gold -= _player.GetInventory().GetItemList()[choice].GetValue();
-                _player.GetInventory().Gold += _player.GetInventory().GetItemList()[choice].GetValue();
+                _merchant.GetInventory().Gold -= _player.GetInventory().GetItemList()[choice].GetValue;
+                _player.GetInventory().Gold += _player.GetInventory().GetItemList()[choice].GetValue;
 
                 //Player item is added to shop inventory and removed from player inventory
                 _merchant.GetInventory().Add(_player.GetInventory().GetItemList()[choice]);
                 _player.GetInventory().Remove(choice);
             }
-            else if(_merchant.GetInventory().Gold < _player.GetInventory().GetItemList()[choice].GetValue())
+            else if(_merchant.GetInventory().Gold < _player.GetInventory().GetItemList()[choice].GetValue)
             {
                 Console.Clear();
-                Console.WriteLine("The " + _merchant.GetName() + " only has: " + _merchant.GetInventory().Gold + "\nItem value: " + _player.GetInventory().GetItemList()[choice].GetValue() + "\n1: Sell anyways? \nEnter: Cancel");
+                Console.WriteLine("The " + _merchant.GetName + " only has: " + _merchant.GetInventory().Gold + "\nItem value: " + _player.GetInventory().GetItemList()[choice].GetValue + "\n1: Sell anyways? \nEnter: Cancel");
                 string decide = Console.ReadLine();
 
                 if(decide == "1")
@@ -157,7 +153,7 @@ namespace Item_Shop
                 {
                     return;
                 }
-            }                      
+            }           
         }
         
         //Displays options for the super user
@@ -264,19 +260,19 @@ namespace Item_Shop
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a defense item you need to \ninput the item's: 'Name', 'Defense stat, 'Gold value', and then 'Description'\nPress enter after you input each paramater");
-                    _merchant.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _merchant.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 2, Console.ReadLine()));
                 }
                 else if (choice == "2")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add an attack item you need to \ninput the item's: 'Name', 'Damage stat', 'Gold vlaue', and the 'Description'\nPress enter after you input each paramater");
-                    _merchant.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _merchant.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 1, Console.ReadLine()));
                 }
                 else if (choice == "3")
                 {
                     Console.Clear();
                     Console.WriteLine("In order to add a consumable item you need to \ninput the item's: 'Name', 'healing amount', 'Gold value', and then 'Description'");
-                    _merchant.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _merchant.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 3, Console.ReadLine()));
                 }
                 else if (choice == "4")
                 {
@@ -312,7 +308,7 @@ namespace Item_Shop
                     Console.WriteLine("In order to add a defense item you need to \ninput the item's: 'Name', 'Defense stat, 'Gold value', and then 'Description'\nPress enter after you input each paramater");
 
                     //Uses the add function of the player to add a new item into the player's inventory
-                    _player.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _player.GetInventory().Add(new DefenseItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 2, Console.ReadLine()));
                 }
                 else if (choice == "2")
                 {
@@ -320,7 +316,7 @@ namespace Item_Shop
                     Console.WriteLine("In order to add an attack item you need to \ninput the item's: 'Name', 'Damage stat', 'Gold vlaue', and the 'Description'\nPress enter after you input each paramater");
 
                     //Uses the add function of the player to add a new item into the player's inventory
-                    _player.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _player.GetInventory().Add(new AttackItem(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 1, Console.ReadLine()));
                 }
                 else if (choice == "3")
                 {
@@ -328,7 +324,7 @@ namespace Item_Shop
                     Console.WriteLine("In order to add a consumable item you need to \ninput the item's: 'Name', 'healing amount', 'Gold value', and then 'Description'");
 
                     //Uses the add function of the player to add a new item into the player's inventory
-                    _player.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine()));
+                    _player.GetInventory().Add(new Consumables(Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), 3, Console.ReadLine()));
                 }
                 else if (choice == "4")
                 {
@@ -354,7 +350,7 @@ namespace Item_Shop
             //Iterates through the shop inventory array to display info to the user.
             for (int i = 0; i < _merchant.GetInventory().GetItemList().Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName());             
+                Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName);             
             }
 
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;
@@ -373,63 +369,12 @@ namespace Item_Shop
             //Iterates through the shop inventory array to display info to the user.
             for (int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName());
+                Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName);
             }
 
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;
 
             _player.GetInventory().Remove(choice);
-        }
-
-        public void SaveGame(string path)
-        {
-            StreamWriter writer = File.CreateText(path);
-
-            writer.WriteLine(_player.GetName());            
-
-            for(int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
-            {
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetName());
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetAttack);
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetDefense);
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetHealing);
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetValue());
-                writer.WriteLine(_player.GetInventory().GetItemList()[i].GetDescription());
-            }
-
-            writer.Close();
-        }
-
-        public void LoadGame(string path)
-        {
-            if(File.Exists(path))
-            {
-                StreamReader reader = File.OpenText(path);
-
-                for(int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
-                {
-                    _player.GetInventory().GetItemList()[i].GetAttack = Convert.ToInt32(reader.ReadLine());
-                    _player.GetInventory().GetItemList()[i].GetDefense = Convert.ToInt32(reader.ReadLine());
-                    _player.GetInventory().GetItemList()[i].GetHealing = Convert.ToInt32(reader.ReadLine());
-
-
-                    //If item is an attack item
-                    if (_player.GetInventory().GetItemList()[i].GetAttack > 0)
-                    {
-                        _player.GetInventory().GetItemList()[i].GetName() = reader.ReadLine();
-                    }
-                    //if item is a defense item
-                    else if((_player.GetInventory().GetItemList()[i].GetDefense > 0))
-                    {
-
-                    }
-                    //if item is a consumable
-                    else
-                    {
-
-                    }
-                }                
-            }
-        }
+        }                
     }    
 }

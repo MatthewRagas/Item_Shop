@@ -14,10 +14,18 @@ namespace Item_Shop
         private ShopInventory _shop = new ShopInventory();
 
         //Returns the name of the shop keeper
-        public string GetName()
+        public string GetName
         {
-            return _name;
+            set
+            {
+                _name = value;
+            }
+            get
+            {
+                return _name;
+            }            
         }
+       
         //Returns the shop inventory variable of the shop keeper.
         public ShopInventory GetInventory()
         {

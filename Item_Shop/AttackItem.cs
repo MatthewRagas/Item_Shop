@@ -8,7 +8,8 @@ namespace Item_Shop
 {
     class AttackItem : Item
     {
-        private int _damage;        
+        private int _damage;
+        private int _itemID;
 
         //Property to reference the _damage variable
         public override int GetAttack
@@ -23,12 +24,25 @@ namespace Item_Shop
             }
         }
 
+        public override int GetID
+        {
+            set
+            {
+                _itemID = value;
+            }
+            get
+            {
+                return _itemID;
+            }
+        }
+
         //Constructor for the attack items
-        public AttackItem(string newName, int newDamage, int newValue, string newDescription)
+        public AttackItem(string newName, int newDamage, int newValue, int newItemID, string newDescription)
         {
             _name = newName;
             _damage = newDamage;
             _value = newValue;
+            _itemID = newItemID;
             _description = newDescription;
         }
 
