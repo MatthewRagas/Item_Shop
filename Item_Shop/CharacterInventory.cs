@@ -19,7 +19,7 @@ namespace Item_Shop
             _itemList[1] = new DefenseItem("Steel Helm", 30, 75, "It would be wise to not leave the head unprotected. This works...I guess.");
             _itemList[2] = new DefenseItem("Steel Shield", 25, 60,"A good steel shield for a good strong mercenary");
             _itemList[3] = new DefenseItem("Obsidian Shield", 80, 300, "Everyone knows the heat of Mt. Ranja's lava cannot be cooled, but somehow, some ancient creature possessed this capability and with it, allowed for such a shield to be made.");
-            _itemList[4] = new AttackItem("Sword of Chaos", 85, 667, "This sword was forged in the blood of battle. As you take hold of it, it almost feels like it's taking hold of you.");
+            _itemList[4] = new AttackItem("Sword of Chaos", 85, 1500, "This sword was forged in the blood of battle. As you take hold of it, it almost feels like it's taking hold of you.");
         }
 
         //Returns the value of the _gold variable
