@@ -58,15 +58,15 @@ namespace Item_Shop
         {
             Console.Clear();
             Console.WriteLine("What would you like to purchase?\n");            
-            if(_merchant.GetInventory().GetItemList().Length > 0)
+            if(_merchant.GetInventory().GetItemList.Length > 0)
             {
                 Console.WriteLine("0: Exit\n");
 
                 //Iterates through the shop inventory array to display info to the user.
-                for (int i = 0; i < _merchant.GetInventory().GetItemList().Length; i++)
+                for (int i = 0; i < _merchant.GetInventory().GetItemList.Length; i++)
                 {
-                    Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName);
-                    Console.WriteLine("Gold: " + _merchant.GetInventory().GetItemList()[i].GetValue + "\n");
+                    Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList[i].GetName);
+                    Console.WriteLine("Gold: " + _merchant.GetInventory().GetItemList[i].GetValue + "\n");
                 }
                 Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                 int choice = Convert.ToInt32(Console.ReadLine());
@@ -86,19 +86,27 @@ namespace Item_Shop
             Console.Clear();
             Console.WriteLine("What would you like to sell?\n");
 
-            Console.WriteLine((_player.GetInventory().GetItemList().Length + 1) + ": Exit\n");
+            Console.WriteLine("0: Exit\n");
 
             //Iterates through the player Inventory to display info to the user
-            if(_player.GetInventory().GetItemList().Length > 0)
+            if(_player.GetInventory().GetItemList.Length > 0)
             {
-                for (int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
+                for (int i = 0; i < _player.GetInventory().GetItemList.Length; i++)
                 {
-                    Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName);
-                    Console.WriteLine("Gold: " + _player.GetInventory().GetItemList()[i].GetValue + "\n");
+                    Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList[i].GetName);
+                    Console.WriteLine("Gold: " + _player.GetInventory().GetItemList[i].GetValue + "\n");
                 }
                 Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                 int choice = Convert.ToInt32(Console.ReadLine());
-                PlayerSelling(choice - 1);
+
+                if(choice == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    PlayerSelling(choice - 1);
+                }                
             }
             Console.Clear();
         }
@@ -109,12 +117,12 @@ namespace Item_Shop
         {
 
             //Allows player to buy item if they have enough gold
-            if(_player.GetInventory().Gold >= _merchant.GetInventory().GetItemList()[choice].GetValue)
+            if(_player.GetInventory().Gold >= _merchant.GetInventory().GetItemList[choice].GetValue)
             {
-                _player.GetInventory().Gold -= _merchant.GetInventory().GetItemList()[choice].GetValue;
-                _merchant.GetInventory().Gold += _merchant.GetInventory().GetItemList()[choice].GetValue;
+                _player.GetInventory().Gold -= _merchant.GetInventory().GetItemList[choice].GetValue;
+                _merchant.GetInventory().Gold += _merchant.GetInventory().GetItemList[choice].GetValue;
 
-                _player.GetInventory().Add(_merchant.GetInventory().GetItemList()[choice]);
+                _player.GetInventory().Add(_merchant.GetInventory().GetItemList[choice]);
                 _merchant.GetInventory().Remove(choice);
             }
             else
@@ -127,21 +135,21 @@ namespace Item_Shop
         //that amount of gold.
         public void PlayerSelling(int choice)
         {
-
-            if(_merchant.GetInventory().Gold >= _player.GetInventory().GetItemList()[choice].GetValue)
+            
+            if(_merchant.GetInventory().Gold >= _player.GetInventory().GetItemList[choice].GetValue)
             {
                 //Gold is added to the player and subtracted from the merchant
-                _merchant.GetInventory().Gold -= _player.GetInventory().GetItemList()[choice].GetValue;
-                _player.GetInventory().Gold += _player.GetInventory().GetItemList()[choice].GetValue;
+                _merchant.GetInventory().Gold -= _player.GetInventory().GetItemList[choice].GetValue;
+                _player.GetInventory().Gold += _player.GetInventory().GetItemList[choice].GetValue;
 
                 //Player item is added to shop inventory and removed from player inventory
-                _merchant.GetInventory().Add(_player.GetInventory().GetItemList()[choice]);
+                _merchant.GetInventory().Add(_player.GetInventory().GetItemList[choice]);
                 _player.GetInventory().Remove(choice);
             }
-            else if(_merchant.GetInventory().Gold < _player.GetInventory().GetItemList()[choice].GetValue)
+            else if(_merchant.GetInventory().Gold < _player.GetInventory().GetItemList[choice].GetValue)
             {
                 Console.Clear();
-                Console.WriteLine("The " + _merchant.GetName + " only has: " + _merchant.GetInventory().Gold + "\nItem value: " + _player.GetInventory().GetItemList()[choice].GetValue + "\n1: Sell anyways? \nEnter: Cancel");
+                Console.WriteLine("The " + _merchant.GetName + " only has: " + _merchant.GetInventory().Gold + "\nItem value: " + _player.GetInventory().GetItemList[choice].GetValue + "\n1: Sell anyways? \nEnter: Cancel");
                 string decide = Console.ReadLine();
 
                 if(decide == "1")
@@ -348,9 +356,9 @@ namespace Item_Shop
             Console.WriteLine("0: Exit\n");
 
             //Iterates through the shop inventory array to display info to the user.
-            for (int i = 0; i < _merchant.GetInventory().GetItemList().Length; i++)
+            for (int i = 0; i < _merchant.GetInventory().GetItemList.Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList()[i].GetName);             
+                Console.WriteLine((i + 1) + ": " + _merchant.GetInventory().GetItemList[i].GetName);             
             }
 
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;
@@ -367,9 +375,9 @@ namespace Item_Shop
             Console.WriteLine("0: Exit\n");
 
             //Iterates through the shop inventory array to display info to the user.
-            for (int i = 0; i < _player.GetInventory().GetItemList().Length; i++)
+            for (int i = 0; i < _player.GetInventory().GetItemList.Length; i++)
             {
-                Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList()[i].GetName);
+                Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList[i].GetName);
             }
 
             int choice = Convert.ToInt32(Console.ReadLine()) - 1;

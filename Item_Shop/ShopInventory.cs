@@ -25,9 +25,16 @@ namespace Item_Shop
         }       
 
         //Returns the item array list.
-        public Item[] GetItemList()
-        {            
-            return _itemList;
+        public Item[] GetItemList
+        {
+            set
+            {
+                _itemList = value;
+            }
+            get
+            {
+                return _itemList;
+            }            
         }
 
         //Returns the value of the gold variable for the shop keeper
@@ -44,6 +51,10 @@ namespace Item_Shop
         }
         public int InventoryLength
         {
+            set
+            {
+                _itemList = new Item[value];
+            }
             get
             {
                 return _itemList.Length;

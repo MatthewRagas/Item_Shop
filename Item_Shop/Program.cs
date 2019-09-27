@@ -9,17 +9,20 @@ namespace Item_Shop
     class Program
     {
         static void Main(string[] args)
-        {
-            Character character = new Character("test");
-            var test = character;
-            
-            Console.WriteLine("Name your Character before you enter the shop.");
-            Character player = new Character(Console.ReadLine());
+        {                       
+            Character player = new Character("Player1");
             ShopKeeper merchant = new ShopKeeper();
             Shop store = new Shop(player, merchant);
-            player.LoadPlayer("Shop.txt");
+            player.LoadPlayer("Player.txt");
+            merchant.LoadMerchant("Shop.txt");
+            if(player.GetName == "Player1")
+            {
+                Console.WriteLine("Name your character before entering the shop.\n");
+                player.GetName = Console.ReadLine();
+            }
             store.ShopMenu();
             player.SavePlayer("Player.txt");
+            merchant.SaveMerchant("Shop.txt");            
             Console.ReadKey();
         }        
     }

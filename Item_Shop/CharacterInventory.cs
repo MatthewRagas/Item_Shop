@@ -50,9 +50,16 @@ namespace Item_Shop
         }
 
         //Gives access to the inventory of the chracter
-        public Item[] GetItemList()
+        public Item[] GetItemList
         {
-            return _itemList;
+            set
+            {
+                _itemList = value;
+            }
+            get
+            {
+                return _itemList;
+            }            
         }
 
         //Adds an item to the character inventory

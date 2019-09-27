@@ -46,32 +46,34 @@ namespace Item_Shop
             writer.WriteLine(GetName);
             
 
-            for (int i = 0; i < GetInventory().GetItemList().Length; i++)
+            for (int i = 0; i < GetInventory().GetItemList.Length; i++)
             {
-                writer.WriteLine(GetInventory().GetItemList()[i].GetID);
+                writer.WriteLine(GetInventory().GetItemList[i].GetID);
                 
 
                 //If attack item
-                if (GetInventory().GetItemList()[i].GetID == 1)
+                if (GetInventory().GetItemList[i].GetID == 1)
                 {
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetName);
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetAttack);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetName);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetAttack);
                 }
                 //If Defense item
-                else if (GetInventory().GetItemList()[i].GetID == 2)
+                else if (GetInventory().GetItemList[i].GetID == 2)
                 {
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetName);
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetDefense);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetName);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetDefense);
                 }
                 //If consumable
-                else if (GetInventory().GetItemList()[i].GetID == 3)
+                else if (GetInventory().GetItemList[i].GetID == 3)
                 {
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetName);
-                    writer.WriteLine(GetInventory().GetItemList()[i].GetHealing);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetName);
+                    writer.WriteLine(GetInventory().GetItemList[i].GetHealing);
                 }
-                writer.WriteLine(GetInventory().GetItemList()[i].GetValue);
-                writer.WriteLine(GetInventory().GetItemList()[i].GetDescription);
+                writer.WriteLine(GetInventory().GetItemList[i].GetValue);
+                writer.WriteLine(GetInventory().GetItemList[i].GetDescription);
             }
+
+            writer.WriteLine(GetInventory().Gold);
 
             writer.Close();
         }
@@ -102,6 +104,8 @@ namespace Item_Shop
                             Convert.ToInt32(reader.ReadLine()),//Item value
                             itemID,//Item ID
                             reader.ReadLine());//item Description
+
+                        GetInventory().GetItemList[i] = attackItem;
                     }
                     //If Defense item
                     else if(itemID == 2)
@@ -110,7 +114,9 @@ namespace Item_Shop
                             Convert.ToInt32(reader.ReadLine()),//Item defense
                             Convert.ToInt32(reader.ReadLine()),//Item value
                             itemID,//Item ID
-                            reader.ReadLine());//item Description                        
+                            reader.ReadLine());//item Description
+
+                        GetInventory().GetItemList[i] = defenseItem;
                     }
                     //If consumable item
                     else if(itemID == 3)
@@ -119,9 +125,15 @@ namespace Item_Shop
                             Convert.ToInt32(reader.ReadLine()),//Item healing
                             Convert.ToInt32(reader.ReadLine()),//Item value
                             itemID,//Item ID
-                            reader.ReadLine());//item Description                        
+                            reader.ReadLine());//item Description
+
+                        GetInventory().GetItemList[i] = consumables;
                     }
                 }
+
+                GetInventory().Gold = Convert.ToInt32(reader.ReadLine());
+
+                reader.Close();
             }
         }
     }
