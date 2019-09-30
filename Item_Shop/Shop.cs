@@ -59,7 +59,7 @@ namespace Item_Shop
 
             int choice = 1;
 
-            while (choice != 0)
+            while (choice != 0 && _merchant.GetInventory().GetItemList.Length > 0)
             {
                 Console.Clear();
 
@@ -75,20 +75,12 @@ namespace Item_Shop
                         Console.WriteLine("Gold: " + _merchant.GetInventory().GetItemList[i].GetValue + "\n");
                     }
                     Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
-                    string input = Console.ReadLine();
-                    if(input[0]<= 57 && input[0] >= 48)
-                    {
-                        Console.WriteLine("Valid Input");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input");
-                    }
+                    choice = Convert.ToInt32(Console.ReadLine());
 
-                    if(choice - 1 < _merchant.GetInventory().InventoryLength && choice - 1 >= 0)
+                    if(choice - 1 >= 0 && choice < _merchant.GetInventory().GetItemList.Length)
                     {
                         PlayerBuying(choice - 1);
-                    }                    
+                    }
                 }
                 Console.Clear();
             }            
@@ -97,9 +89,9 @@ namespace Item_Shop
         //Displays possible items that can be sold from player inventory
         public void SellingMenu()
         {            
-            int choice = 1;
+            int choice = 0;
 
-            while(choice != 0)
+            while(choice != 0 && _player.GetInventory().GetItemList.Length > 0)
             {
                 Console.Clear();
 
@@ -118,9 +110,9 @@ namespace Item_Shop
                     Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                     choice = Convert.ToInt32(Console.ReadLine());
 
-                    if (choice - 1 < _player.GetInventory().InventoryLength && choice - 1 >= 0)
+                    if (choice - 1 >= 0 && choice < _merchant.GetInventory().GetItemList.Length)
                     {
-                        PlayerSelling(choice - 1);
+                        PlayerBuying(choice - 1);
                     }
 
                 }
