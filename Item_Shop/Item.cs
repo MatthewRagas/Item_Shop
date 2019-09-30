@@ -42,6 +42,7 @@ namespace Item_Shop
             }            
         }
 
+        //Property to set and get the damage of attack items
         public virtual int GetAttack
         {
             set
@@ -54,6 +55,7 @@ namespace Item_Shop
             }            
         }
 
+        //Property to get the defense of defense items
         public virtual int GetDefense
         {
             set
@@ -66,6 +68,7 @@ namespace Item_Shop
             }            
         }
 
+        //Property to get the healing of consumable items
         public virtual int GetHealing
         {
             set
@@ -77,7 +80,8 @@ namespace Item_Shop
                 return 0;
             }            
         }
-
+        
+        //Property to et the description of items
         public string GetDescription
         {
             set
@@ -90,6 +94,7 @@ namespace Item_Shop
             }            
         }
 
+        //Property to get the item id
         public virtual int GetID
         {
             set
