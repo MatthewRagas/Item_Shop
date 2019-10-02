@@ -7,14 +7,19 @@ using System.IO;
 
 namespace Item_Shop
 {
-    class ShopKeeper
+    class Character
     {
-        private string _name = "store merchant";
+        private CharacterInventory _bag = new CharacterInventory();
         
+        private string _name;
 
-        private ShopInventory _shopInventory = new ShopInventory();
+        //Constructor for characters that passes in a string for a name
+        public Character(string name)
+        {
+            _name = name;
+        }
 
-        //Returns the name of the shop keeper
+        //Returns the name variable of the character
         public string GetName
         {
             set
@@ -25,26 +30,26 @@ namespace Item_Shop
             {
                 return _name;
             }            
-        }
-       
-        //Returns the shop inventory variable of the shop keeper.
-        public ShopInventory GetInventory()
-        {                        
-                return _shopInventory;                        
+        }       
+
+        //Returns the Character Inventory variable of the character
+        public CharacterInventory GetInventory()
+        {
+            return _bag;
         }
 
-        public void SaveMerchant(string path)
-        {
+        public void SavePlayer(string path)
+        {            
             StreamWriter writer = File.CreateText(path);
 
             writer.WriteLine(GetInventory().InventoryLength);
             writer.WriteLine(GetName);
-
+            
 
             for (int i = 0; i < GetInventory().GetItemList.Length; i++)
             {
                 writer.WriteLine(GetInventory().GetItemList[i].GetID);
-
+                
 
                 //If attack item
                 if (GetInventory().GetItemList[i].GetID == 1)
@@ -73,11 +78,11 @@ namespace Item_Shop
             writer.Close();
         }
 
-        public void LoadMerchant(string path)
+        public void LoadPlayer(string path)
         {
             if (File.Exists(path))
             {
-                StreamReader reader = File.OpenText(path);
+                StreamReader reader = File.OpenText(path);                
 
                 GetInventory().InventoryLength = Convert.ToInt32(reader.ReadLine());
 
@@ -92,7 +97,7 @@ namespace Item_Shop
                     itemID = Convert.ToInt32(reader.ReadLine());
 
                     //If Attack item
-                    if (itemID == 1)
+                    if(itemID == 1)
                     {
                         AttackItem attackItem = new AttackItem(reader.ReadLine(),//Item Name
                             Convert.ToInt32(reader.ReadLine()),//Item damage
@@ -103,7 +108,7 @@ namespace Item_Shop
                         GetInventory().GetItemList[i] = attackItem;
                     }
                     //If Defense item
-                    else if (itemID == 2)
+                    else if(itemID == 2)
                     {
                         DefenseItem defenseItem = new DefenseItem(reader.ReadLine(),//Item Name
                             Convert.ToInt32(reader.ReadLine()),//Item defense
@@ -114,7 +119,7 @@ namespace Item_Shop
                         GetInventory().GetItemList[i] = defenseItem;
                     }
                     //If consumable item
-                    else if (itemID == 3)
+                    else if(itemID == 3)
                     {
                         Consumables consumables = new Consumables(reader.ReadLine(),//Item Name
                             Convert.ToInt32(reader.ReadLine()),//Item healing
@@ -131,6 +136,5 @@ namespace Item_Shop
                 reader.Close();
             }
         }
-
     }
 }

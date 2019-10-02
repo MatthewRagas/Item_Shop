@@ -12,7 +12,7 @@ namespace Item_Shop
         private string _name = "store merchant";
         
 
-        private ShopInventory _shopInventory = new ShopInventory();
+        private ShopInventory _shop = new ShopInventory();
 
         //Returns the name of the shop keeper
         public string GetName
@@ -30,7 +30,7 @@ namespace Item_Shop
         //Returns the shop inventory variable of the shop keeper.
         public ShopInventory GetInventory()
         {                        
-                return _shopInventory;                        
+                return _shop;                        
         }
 
         public void SaveMerchant(string path)

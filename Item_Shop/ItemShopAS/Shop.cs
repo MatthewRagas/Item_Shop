@@ -64,8 +64,8 @@ namespace Item_Shop
                 Console.Clear();
 
                 Console.WriteLine("What would you like to purchase?\n");
-                
-                
+                if (_merchant.GetInventory().GetItemList.Length > 0)
+                {
                     Console.WriteLine("0: Exit\n");
 
                     //Iterates through the shop inventory array to display info to the user.
@@ -79,61 +79,11 @@ namespace Item_Shop
 
                     if(choice - 1 >= 0 && choice - 1 < _merchant.GetInventory().GetItemList.Length)
                     {
-                        choice -= 1;
-
-                        if (_merchant.GetInventory().GetItemList[choice].GetID == 1)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _merchant.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Damage: " + _merchant.GetInventory().GetItemList[choice].GetAttack);
-                            Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
-                            string decide = Console.ReadLine();
-                            if (decide == "Yes")
-                            {
-                                PlayerBuying(choice);
-                            }
-                        }
-                        else if(_merchant.GetInventory().GetItemList[choice].GetID == 2)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _merchant.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Defense: " + _merchant.GetInventory().GetItemList[choice].GetDefense);
-                            Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
-                            string decide = Console.ReadLine();
-                            if (decide == "Yes")
-                            {
-                                PlayerBuying(choice);
-                            }
-                        }
-                        else if(_merchant.GetInventory().GetItemList[choice].GetID == 3)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _merchant.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Healing: " + _merchant.GetInventory().GetItemList[choice].GetHealing);
-                            Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
-                            string decide = Console.ReadLine();
-                            if (decide == "Yes")
-                            {
-                                PlayerBuying(choice);
-                            }
-                        }
+                        PlayerBuying(choice - 1);
                     }
-                
+                }
                 Console.Clear();
-            } 
-            
-            if(_merchant.GetInventory().GetItemList.Length <= 0)
-            {
-                Console.Clear();
-                Console.WriteLine("There are no items to purchase.");
-                Console.ReadKey();
-            }
+            }            
         }
 
         //Displays possible items that can be sold from player inventory
@@ -150,8 +100,8 @@ namespace Item_Shop
                 Console.WriteLine("0: Exit\n");
 
                 //Iterates through the player Inventory to display info to the user
-                
-                
+                if (_player.GetInventory().GetItemList.Length > 0)
+                {
                     for (int i = 0; i < _player.GetInventory().GetItemList.Length; i++)
                     {
                         Console.WriteLine((i + 1) + ": " + _player.GetInventory().GetItemList[i].GetName);
@@ -160,63 +110,13 @@ namespace Item_Shop
                     Console.WriteLine(_player.GetName + ": " + _player.GetInventory().Gold + "        " + _merchant.GetName + ": " + _merchant.GetInventory().Gold);
                     choice = Convert.ToInt32(Console.ReadLine());
 
-                    if (choice - 1 >= 0 && choice - 1 < _player.GetInventory().GetItemList.Length)
+                    if (choice - 1 >= 0 && choice - 1 < _merchant.GetInventory().GetItemList.Length)
                     {
-                        choice -= 1;
-
-                        if (_player.GetInventory().GetItemList[choice].GetID == 1)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _player.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Damage: " + _player.GetInventory().GetItemList[choice].GetAttack);
-                            Console.WriteLine("Value: " + _player.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _player.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Sell?\nyes      no");
-                            string decide = Console.ReadLine();
-                            if (decide == "yes")
-                            {
-                                PlayerSelling(choice);
-                            }
-                        }
-                        else if (_player.GetInventory().GetItemList[choice].GetID == 2)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _player.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Defense: " + _player.GetInventory().GetItemList[choice].GetDefense);
-                            Console.WriteLine("Value: " + _player.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _player.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Sell?\nyes      no");
-                            string decide = Console.ReadLine();
-                            if (decide == "yes")
-                            {
-                                PlayerSelling(choice);
-                            }
-                        }
-                        else if (_player.GetInventory().GetItemList[choice].GetID == 3)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Name: " + _player.GetInventory().GetItemList[choice].GetName);
-                            Console.WriteLine("Healing: " + _player.GetInventory().GetItemList[choice].GetHealing);
-                            Console.WriteLine("Value: " + _player.GetInventory().GetItemList[choice].GetValue);
-                            Console.WriteLine("\n" + _player.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Sell?\nyes      no");
-                            string decide = Console.ReadLine();
-                            if (decide == "yes")
-                            {
-                                PlayerSelling(choice);
-                            }
-                        }
+                        PlayerSelling(choice - 1);
                     }
 
-                
-            }
-
-            if (_player.GetInventory().GetItemList.Length <= 0)
-            {
-                Console.Clear();
-                Console.WriteLine("There are no items to sell.");
-                Console.ReadKey();
-            }
+                }
+            }            
         }
 
         //Decrements the gold variable of the player by the value of the item purchased.
@@ -232,7 +132,6 @@ namespace Item_Shop
 
                 _player.GetInventory().Add(_merchant.GetInventory().GetItemList[choice]);
                 _merchant.GetInventory().Remove(choice);
-
             }
             else
             {
@@ -500,6 +399,6 @@ namespace Item_Shop
             {
                 _player.GetInventory().Remove(choice);
             }            
-        }
+        }                
     }    
 }
