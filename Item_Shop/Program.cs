@@ -9,7 +9,8 @@ namespace Item_Shop
     class Program
     {
         static void Main(string[] args)
-        {                       
+        {
+            Item[] itemList =
             Character player = new Character("Player1");
             ShopKeeper merchant = new ShopKeeper();
             Shop weaponStore = new Shop(player, merchant);

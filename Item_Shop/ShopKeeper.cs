@@ -10,9 +10,19 @@ namespace Item_Shop
     class ShopKeeper
     {
         private string _name = "store merchant";
-        
 
-        private ShopInventory _shopInventory = new ShopInventory();
+
+        private ShopInventory _shopInventory;
+
+        public ShopKeeper()
+        {
+            _shopInventory = new ShopInventory();
+        }
+
+        public ShopKeeper(ShopInventory newInventory)
+        {
+            _shopInventory = newInventory;
+        }
 
         //Returns the name of the shop keeper
         public string GetName
