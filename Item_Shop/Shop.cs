@@ -88,9 +88,9 @@ namespace Item_Shop
                             Console.WriteLine("Damage: " + _merchant.GetInventory().GetItemList[choice].GetAttack);
                             Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
                             Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
+                            Console.WriteLine("Buy?\nyes      No");
                             string decide = Console.ReadLine();
-                            if (decide == "Yes")
+                            if (decide == "yes")
                             {
                                 PlayerBuying(choice);
                             }
@@ -102,9 +102,9 @@ namespace Item_Shop
                             Console.WriteLine("Defense: " + _merchant.GetInventory().GetItemList[choice].GetDefense);
                             Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
                             Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
+                            Console.WriteLine("Buy?\nyes      No");
                             string decide = Console.ReadLine();
-                            if (decide == "Yes")
+                            if (decide == "yes")
                             {
                                 PlayerBuying(choice);
                             }
@@ -116,9 +116,9 @@ namespace Item_Shop
                             Console.WriteLine("Healing: " + _merchant.GetInventory().GetItemList[choice].GetHealing);
                             Console.WriteLine("Value: " + _merchant.GetInventory().GetItemList[choice].GetValue);
                             Console.WriteLine("\n" + _merchant.GetInventory().GetItemList[choice].GetDescription + "\n");
-                            Console.WriteLine("Buy?\nYes      No");
+                            Console.WriteLine("Buy?\nyes      No");
                             string decide = Console.ReadLine();
-                            if (decide == "Yes")
+                            if (decide == "yes")
                             {
                                 PlayerBuying(choice);
                             }
@@ -267,6 +267,9 @@ namespace Item_Shop
                 {
                     _player.GetInventory().Gold += _merchant.GetInventory().Gold;
                     _merchant.GetInventory().Gold -= _merchant.GetInventory().Gold;
+
+                    _player.GetInventory().Remove(choice);
+                    _merchant.GetInventory().Add(_player.GetInventory().GetItemList[choice]);
                 }
                 else
                 {

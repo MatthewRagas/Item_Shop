@@ -22,7 +22,7 @@ namespace Item_Shop
             _itemList[4] = new DefenseItem("Gloves", 0, 5, 2, "It's chilly outside.");
             _itemList[5] = new DefenseItem("Leather Boots", 10, 25, 2, "Standard training gear.");
             _itemList[6] = new Consumables("Brownies", 15, 3, 3, "Warm and fluffy. Just like mother used to make them.");
-            _itemList[7] = new Consumables("God's Chosen Chicken Sandwich", 777, 10, 3, "This chicken has been embued with the power on high and brings new life to you.");
+            _itemList[7] = new Consumables("God's Chosen Chicken Sandwich", 777, 1000, 3, "This chicken has been embued with the power on high and brings new life to you.");
         }
 
         public ShopInventory(Item[] newList)
