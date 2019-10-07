@@ -43,6 +43,10 @@ namespace Item_Shop
             _value = newValue;
             _itemID = newItemID;
             _description = newDescription;
+            if(_value < 0)
+            {
+                _value = 0;
+            }
         }
     }
 }
